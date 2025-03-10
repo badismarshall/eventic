@@ -1,0 +1,1041 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model amenity {
+  id                  BigInt                @id(map: "idx_29928_primary") @default(autoincrement())
+  icon                String                @db.VarChar(50)
+  hidden              Boolean
+  created_at          DateTime              @db.Timestamptz(6)
+  updated_at          DateTime?             @db.Timestamptz(6)
+  deleted_at          DateTime?             @db.Timestamptz(6)
+  amenity_translation amenity_translation[]
+  venue_amenity       venue_amenity[]
+}
+
+model amenity_translation {
+  id              BigInt   @id(map: "idx_29933_primary") @default(autoincrement())
+  translatable_id BigInt?
+  name            String   @db.VarChar(50)
+  slug            String   @unique(map: "idx_29933_uniq_3c354ff8989d9b62") @db.VarChar(80)
+  locale          String   @db.VarChar(255)
+  amenity         amenity? @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_3c354ff82c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_29933_amenity_translation_unique_translation")
+  @@index([translatable_id], map: "idx_29933_idx_3c354ff82c2ac5d3")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model app_layout_setting {
+  id                     BigInt    @id(map: "idx_29938_primary") @default(autoincrement())
+  logo_name              String?   @db.VarChar(50)
+  logo_size              BigInt?
+  logo_mime_type         String?   @db.VarChar(50)
+  logo_original_name     String?   @db.VarChar(1000)
+  logo_dimensions        String?
+  favicon_name           String?   @db.VarChar(50)
+  favicon_size           BigInt?
+  favicon_mime_type      String?   @db.VarChar(50)
+  favicon_original_name  String?   @db.VarChar(1000)
+  favicon_dimensions     String?
+  updated_at             DateTime? @db.Timestamptz(6)
+  og_image_name          String?   @db.VarChar(50)
+  og_image_size          BigInt?
+  og_image_mime_type     String?   @db.VarChar(50)
+  og_image_original_name String?   @db.VarChar(1000)
+  og_image_dimensions    String?
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model audience {
+  id                   BigInt                 @id(map: "idx_29954_primary") @default(autoincrement())
+  image_name           String?                @db.VarChar(50)
+  image_size           BigInt?
+  image_mime_type      String?                @db.VarChar(50)
+  image_original_name  String?                @db.VarChar(1000)
+  image_dimensions     String?
+  hidden               Boolean
+  created_at           DateTime               @db.Timestamptz(6)
+  updated_at           DateTime?              @db.Timestamptz(6)
+  deleted_at           DateTime?              @db.Timestamptz(6)
+  audience_translation audience_translation[]
+  event_audience       event_audience[]
+}
+
+model audience_translation {
+  id              BigInt    @id(map: "idx_29964_primary") @default(autoincrement())
+  translatable_id BigInt?
+  name            String    @db.VarChar(50)
+  slug            String    @unique(map: "idx_29964_uniq_5cf81d36989d9b62") @db.VarChar(80)
+  locale          String    @db.VarChar(255)
+  audience        audience? @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_5cf81d362c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_29964_audience_translation_unique_translation")
+  @@index([translatable_id], map: "idx_29964_idx_5cf81d362c2ac5d3")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model blog_post {
+  id                    BigInt                  @id(map: "idx_29969_primary") @default(autoincrement())
+  category_id           BigInt?
+  readtime              BigInt?
+  image_name            String?                 @db.VarChar(50)
+  image_size            BigInt?
+  image_mime_type       String?                 @db.VarChar(50)
+  image_original_name   String?                 @db.VarChar(1000)
+  image_dimensions      String?
+  views                 BigInt?
+  hidden                Boolean
+  created_at            DateTime                @db.Timestamptz(6)
+  updated_at            DateTime?               @db.Timestamptz(6)
+  deleted_at            DateTime?               @db.Timestamptz(6)
+  blog_post_category    blog_post_category?     @relation(fields: [category_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_e66028c712469de2")
+  blog_post_translation blog_post_translation[]
+
+  @@index([category_id], map: "idx_29969_idx_e66028c712469de2")
+}
+
+model blog_post_category {
+  id                             BigInt                           @id(map: "idx_29979_primary") @default(autoincrement())
+  hidden                         Boolean
+  created_at                     DateTime                         @db.Timestamptz(6)
+  updated_at                     DateTime?                        @db.Timestamptz(6)
+  deleted_at                     DateTime?                        @db.Timestamptz(6)
+  blog_post                      blog_post[]
+  blog_post_category_translation blog_post_category_translation[]
+}
+
+model blog_post_category_translation {
+  id                 BigInt              @id(map: "idx_29984_primary") @default(autoincrement())
+  translatable_id    BigInt?
+  name               String              @db.VarChar(50)
+  slug               String              @unique(map: "idx_29984_uniq_baf151ea989d9b62") @db.VarChar(80)
+  locale             String              @db.VarChar(255)
+  blog_post_category blog_post_category? @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_baf151ea2c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_29984_blog_post_category_translation_unique_transla")
+  @@index([translatable_id], map: "idx_29984_idx_baf151ea2c2ac5d3")
+}
+
+model blog_post_translation {
+  id              BigInt     @id(map: "idx_29989_primary") @default(autoincrement())
+  translatable_id BigInt?
+  name            String     @db.VarChar(80)
+  content         String
+  tags            String?    @db.VarChar(500)
+  slug            String     @unique(map: "idx_29989_uniq_6a7c548d989d9b62") @db.VarChar(100)
+  locale          String     @db.VarChar(255)
+  blog_post       blog_post? @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_6a7c548d2c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_29989_blog_post_translation_unique_translation")
+  @@index([translatable_id], map: "idx_29989_idx_6a7c548d2c2ac5d3")
+}
+
+model cart_element {
+  id                BigInt             @id(map: "idx_29997_primary") @default(autoincrement())
+  user_id           BigInt?
+  eventticket_id    BigInt?
+  quantity          BigInt?
+  ticket_fee        Decimal?           @db.Decimal(10, 2)
+  created_at        DateTime           @db.Timestamptz(6)
+  updated_at        DateTime?          @db.Timestamptz(6)
+  event_date_ticket event_date_ticket? @relation(fields: [eventticket_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_ffaba270182ceb62")
+  user              user?              @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_ffaba270a76ed395")
+
+  @@index([eventticket_id], map: "idx_29997_idx_ffaba270182ceb62")
+  @@index([user_id], map: "idx_29997_idx_ffaba270a76ed395")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model category {
+  id                   BigInt                 @id(map: "idx_30003_primary") @default(autoincrement())
+  icon                 String                 @db.VarChar(50)
+  image_name           String?                @db.VarChar(50)
+  image_size           BigInt?
+  image_mime_type      String?                @db.VarChar(50)
+  image_original_name  String?                @db.VarChar(1000)
+  image_dimensions     String?
+  hidden               Boolean
+  featured             Boolean
+  featuredorder        BigInt?
+  created_at           DateTime               @db.Timestamptz(6)
+  updated_at           DateTime?              @db.Timestamptz(6)
+  deleted_at           DateTime?              @db.Timestamptz(6)
+  category_translation category_translation[]
+  event                event[]
+  organizer_category   organizer_category[]
+}
+
+model category_translation {
+  id              BigInt    @id(map: "idx_30013_primary") @default(autoincrement())
+  translatable_id BigInt?
+  name            String    @db.VarChar(50)
+  slug            String    @unique(map: "idx_30013_uniq_3cfc55ab989d9b62") @db.VarChar(80)
+  locale          String    @db.VarChar(255)
+  category        category? @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_3cfc55ab2c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_30013_category_translation_unique_translation")
+  @@index([translatable_id], map: "idx_30013_idx_3cfc55ab2c2ac5d3")
+}
+
+model comment {
+  id         BigInt   @id(map: "idx_30018_primary") @default(autoincrement())
+  thread_id  String?  @db.VarChar(255)
+  author_id  BigInt?
+  body       String
+  ancestors  String   @db.VarChar(1024)
+  depth      BigInt
+  created_at DateTime @db.Timestamptz(6)
+  state      BigInt
+  score      BigInt
+  thread     thread?  @relation(fields: [thread_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_e58109f5e2904019")
+  user       user?    @relation(fields: [author_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_e58109f5f675f31b")
+  vote       vote[]
+
+  @@index([thread_id], map: "idx_30018_idx_e58109f5e2904019")
+  @@index([author_id], map: "idx_30018_idx_e58109f5f675f31b")
+}
+
+model country {
+  id                  BigInt                @id(map: "idx_30026_primary") @default(autoincrement())
+  code                String                @db.VarChar(2)
+  hidden              Boolean
+  created_at          DateTime              @db.Timestamptz(6)
+  updated_at          DateTime?             @db.Timestamptz(6)
+  deleted_at          DateTime?             @db.Timestamptz(6)
+  country_translation country_translation[]
+  organizer           organizer[]
+  payment             payment[]
+  user                user[]
+  venue               venue[]
+}
+
+model country_translation {
+  id              BigInt   @id(map: "idx_30031_primary") @default(autoincrement())
+  translatable_id BigInt?
+  name            String   @db.VarChar(50)
+  slug            String   @unique(map: "idx_30031_uniq_1aaa1d02989d9b62") @db.VarChar(80)
+  locale          String   @db.VarChar(255)
+  country         country? @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_1aaa1d022c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_30031_country_translation_unique_translation")
+  @@index([translatable_id], map: "idx_30031_idx_1aaa1d022c2ac5d3")
+}
+
+model currency {
+  id     BigInt  @id(map: "idx_30036_primary") @default(autoincrement())
+  ccy    String  @unique(map: "idx_30036_uniq_e0f45684d2d95d97") @db.VarChar(3)
+  symbol String? @db.VarChar(50)
+}
+
+model event {
+  id                    BigInt                  @id(map: "idx_30042_primary") @default(autoincrement())
+  category_id           BigInt?
+  organizer_id          BigInt?
+  isonhomepageslider_id BigInt?
+  reference             String                  @db.VarChar(255)
+  views                 BigInt
+  youtubeurl            String?                 @db.VarChar(255)
+  externallink          String?                 @db.VarChar(255)
+  phonenumber           String?                 @db.VarChar(50)
+  email                 String?                 @db.VarChar(255)
+  instagram             String?                 @db.VarChar(255)
+  facebook              String?                 @db.VarChar(255)
+  artists               String?                 @db.VarChar(500)
+  tags                  String?                 @db.VarChar(500)
+  year                  String?                 @db.VarChar(5)
+  created_at            DateTime                @db.Timestamptz(6)
+  updated_at            DateTime?               @db.Timestamptz(6)
+  deleted_at            DateTime?               @db.Timestamptz(6)
+  published             Boolean
+  enablereviews         Boolean
+  showattendees         Boolean
+  venue_id              BigInt?
+  online                Boolean?
+  active                Boolean?
+  referance             String?
+  startdate             DateTime?               @db.Timestamptz(6)
+  enddate               DateTime?               @db.Timestamptz(6)
+  venue                 venue?                  @relation(fields: [venue_id], references: [id])
+  category              category?               @relation(fields: [category_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_e1933dcb12469de2")
+  homepage_hero_setting homepage_hero_setting?  @relation(fields: [isonhomepageslider_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_e1933dcb376c51ef")
+  organizer             organizer?              @relation(fields: [organizer_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_e1933dcb876c4dda")
+  event_audience        event_audience[]
+  event_date_ticket     event_date_ticket[]
+  event_image           event_image[]
+  event_language        event_language[]
+  event_subtitle        event_subtitle[]
+  event_translation     event_translation[]
+  eventdate_pointofsale eventdate_pointofsale[]
+  eventdate_scanner     eventdate_scanner[]
+  favorites             favorites[]
+  payout_request        payout_request[]
+  review                review[]
+
+  @@index([category_id], map: "idx_30042_idx_e1933dcb12469de2")
+  @@index([isonhomepageslider_id], map: "idx_30042_idx_e1933dcb376c51ef")
+  @@index([organizer_id], map: "idx_30042_idx_e1933dcb876c4dda")
+}
+
+model event_audience {
+  event_id    BigInt
+  audience_id BigInt
+  event       event    @relation(fields: [event_id], references: [id], onUpdate: Restrict, map: "fk_f46faec788818add")
+  audience    audience @relation(fields: [audience_id], references: [id], onUpdate: Restrict, map: "fk_f46faec797946d63")
+
+  @@id([event_id, audience_id], map: "idx_30069_primary")
+  @@index([event_id], map: "idx_30069_idx_f46faec788818add")
+  @@index([audience_id], map: "idx_30069_idx_f46faec797946d63")
+}
+
+model event_date_ticket {
+  id                 BigInt               @id(map: "idx_30078_primary") @default(autoincrement())
+  eventdate_id       BigInt?
+  active             Boolean
+  reference          String               @db.VarChar(10)
+  name               String               @db.VarChar(50)
+  description        String?              @db.VarChar(255)
+  free               Boolean
+  price              Decimal?             @db.Decimal(10, 2)
+  promotionalprice   Decimal?             @db.Decimal(10, 2)
+  quantity           BigInt?
+  ticketsperattendee BigInt?
+  salesstartdate     DateTime?            @db.Timestamptz(6)
+  salesenddate       DateTime?            @db.Timestamptz(6)
+  position           BigInt
+  cart_element       cart_element[]
+  event_date         event?               @relation(fields: [eventdate_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_e8b0fcf9733da6ba")
+  order_element      order_element[]
+  ticket_reservation ticket_reservation[]
+
+  @@index([eventdate_id], map: "idx_30078_idx_e8b0fcf9733da6ba")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model event_image {
+  id                  BigInt    @id(map: "idx_30086_primary") @default(autoincrement())
+  event_id            BigInt?
+  image_name          String?   @db.VarChar(50)
+  image_size          BigInt?
+  image_mime_type     String?   @db.VarChar(50)
+  image_original_name String?   @db.VarChar(1000)
+  image_dimensions    String?
+  position            BigInt?
+  updated_at          DateTime? @db.Timestamptz(6)
+  event               event?    @relation(fields: [event_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_6a4e8e5e71f7e88b")
+
+  @@index([event_id], map: "idx_30086_idx_6a4e8e5e71f7e88b")
+}
+
+model event_language {
+  event_id    BigInt
+  language_id BigInt
+  event       event    @relation(fields: [event_id], references: [id], onUpdate: Restrict, map: "fk_dd794b6a88818add")
+  language    language @relation(fields: [language_id], references: [id], onUpdate: Restrict, map: "fk_dd794b6a91e91181")
+
+  @@id([event_id, language_id], map: "idx_30095_primary")
+  @@index([event_id], map: "idx_30095_idx_dd794b6a88818add")
+  @@index([language_id], map: "idx_30095_idx_dd794b6a91e91181")
+}
+
+model event_subtitle {
+  event_id    BigInt
+  language_id BigInt
+  event       event    @relation(fields: [event_id], references: [id], onUpdate: Restrict, map: "fk_5827ad6e88818add")
+  language    language @relation(fields: [language_id], references: [id], onUpdate: Restrict, map: "fk_5827ad6e91e91181")
+
+  @@id([event_id, language_id], map: "idx_30098_primary")
+  @@index([event_id], map: "idx_30098_idx_5827ad6e88818add")
+  @@index([language_id], map: "idx_30098_idx_5827ad6e91e91181")
+}
+
+model event_translation {
+  id              BigInt  @id(map: "idx_30102_primary") @default(autoincrement())
+  translatable_id BigInt?
+  name            String  @db.VarChar(100)
+  description     String?
+  slug            String  @unique(map: "idx_30102_uniq_2fcd2bd6989d9b62") @db.VarChar(150)
+  locale          String  @db.VarChar(255)
+  event           event?  @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_2fcd2bd62c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_30102_event_translation_unique_translation")
+  @@index([translatable_id], map: "idx_30102_idx_2fcd2bd62c2ac5d3")
+}
+
+model eventdate_pointofsale {
+  eventdate_id   BigInt
+  pointofsale_id BigInt
+  event_date     event       @relation(fields: [eventdate_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_7e37ebfc733da6ba")
+  pointofsale    pointofsale @relation(fields: [pointofsale_id], references: [id], onUpdate: Restrict, map: "fk_7e37ebfc18e07bf3")
+
+  @@id([eventdate_id, pointofsale_id], map: "idx_30063_primary")
+  @@index([pointofsale_id], map: "idx_30063_idx_7e37ebfc18e07bf3")
+  @@index([eventdate_id], map: "idx_30063_idx_7e37ebfc733da6ba")
+}
+
+model eventdate_scanner {
+  eventdate_id BigInt
+  scanner_id   BigInt
+  event_date   event   @relation(fields: [eventdate_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_a9110493733da6ba")
+  scanner      scanner @relation(fields: [scanner_id], references: [id], onUpdate: Restrict, map: "fk_a911049367c89e33")
+
+  @@id([eventdate_id, scanner_id], map: "idx_30066_primary")
+  @@index([scanner_id], map: "idx_30066_idx_a911049367c89e33")
+  @@index([eventdate_id], map: "idx_30066_idx_a9110493733da6ba")
+}
+
+model favorites {
+  event_id BigInt
+  user_id  BigInt
+  event    event  @relation(fields: [event_id], references: [id], onUpdate: Restrict, map: "fk_b853a82f88818add")
+  user     user   @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "fk_b853a82ffd57ceab")
+
+  @@id([event_id, user_id], map: "idx_30108_primary")
+  @@index([event_id], map: "idx_30108_idx_b853a82f88818add")
+  @@index([user_id], map: "idx_30108_idx_b853a82ffd57ceab")
+}
+
+model following {
+  organizer_id BigInt
+  user_id      BigInt
+  organizer    organizer @relation(fields: [organizer_id], references: [id], onUpdate: Restrict, map: "fk_2d8545399f5d9622")
+  user         user      @relation(fields: [user_id], references: [id], onUpdate: Restrict, map: "fk_2d854539fd57ceab")
+
+  @@id([organizer_id, user_id], map: "idx_30111_primary")
+  @@index([organizer_id], map: "idx_30111_idx_2d8545399f5d9622")
+  @@index([user_id], map: "idx_30111_idx_2d854539fd57ceab")
+}
+
+model help_center_article {
+  id                              BigInt                            @id(map: "idx_30115_primary") @default(autoincrement())
+  category_id                     BigInt?
+  views                           BigInt?
+  hidden                          Boolean
+  featured                        Boolean
+  created_at                      DateTime                          @db.Timestamptz(6)
+  updated_at                      DateTime?                         @db.Timestamptz(6)
+  deleted_at                      DateTime?                         @db.Timestamptz(6)
+  help_center_category            help_center_category?             @relation(fields: [category_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_75f977e312469de2")
+  help_center_article_translation help_center_article_translation[]
+
+  @@index([category_id], map: "idx_30115_idx_75f977e312469de2")
+}
+
+model help_center_article_translation {
+  id                  BigInt               @id(map: "idx_30120_primary") @default(autoincrement())
+  translatable_id     BigInt?
+  title               String               @db.VarChar(80)
+  slug                String               @unique(map: "idx_30120_uniq_54ab4030989d9b62") @db.VarChar(100)
+  content             String
+  tags                String?              @db.VarChar(150)
+  locale              String               @db.VarChar(255)
+  help_center_article help_center_article? @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_54ab40302c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_30120_help_center_article_translation_unique_transl")
+  @@index([translatable_id], map: "idx_30120_idx_54ab40302c2ac5d3")
+}
+
+model help_center_category {
+  id                               BigInt                             @id(map: "idx_30128_primary") @default(autoincrement())
+  parent_id                        BigInt?
+  icon                             String?                            @db.VarChar(50)
+  hidden                           Boolean
+  created_at                       DateTime                           @db.Timestamptz(6)
+  updated_at                       DateTime?                          @db.Timestamptz(6)
+  deleted_at                       DateTime?                          @db.Timestamptz(6)
+  help_center_article              help_center_article[]
+  help_center_category             help_center_category?              @relation("help_center_categoryTohelp_center_category", fields: [parent_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_9be9ad17727aca70")
+  other_help_center_category       help_center_category[]             @relation("help_center_categoryTohelp_center_category")
+  help_center_category_translation help_center_category_translation[]
+
+  @@index([parent_id], map: "idx_30128_idx_9be9ad17727aca70")
+}
+
+model help_center_category_translation {
+  id                   BigInt                @id(map: "idx_30134_primary") @default(autoincrement())
+  translatable_id      BigInt?
+  name                 String                @db.VarChar(50)
+  slug                 String                @unique(map: "idx_30134_uniq_2b8afef5989d9b62") @db.VarChar(80)
+  locale               String                @db.VarChar(255)
+  help_center_category help_center_category? @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_2b8afef52c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_30134_help_center_category_translation_unique_trans")
+  @@index([translatable_id], map: "idx_30134_idx_2b8afef52c2ac5d3")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model homepage_hero_setting {
+  id                                BigInt                              @id(map: "idx_30139_primary") @default(autoincrement())
+  content                           String                              @db.VarChar(15)
+  custom_background_name            String?                             @db.VarChar(50)
+  custom_background_size            BigInt?
+  custom_background_mime_type       String?                             @db.VarChar(50)
+  custom_background_original_name   String?                             @db.VarChar(1000)
+  custom_background_dimensions      String?
+  show_search_box                   Boolean?
+  updated_at                        DateTime?                           @db.Timestamptz(6)
+  event                             event[]
+  homepage_hero_setting_translation homepage_hero_setting_translation[]
+  user                              user[]
+}
+
+model homepage_hero_setting_translation {
+  id                    BigInt                 @id(map: "idx_30149_primary") @default(autoincrement())
+  translatable_id       BigInt?
+  title                 String?                @db.VarChar(100)
+  paragraph             String?                @db.VarChar(500)
+  locale                String                 @db.VarChar(255)
+  homepage_hero_setting homepage_hero_setting? @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_5dd4b1372c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_30149_homepage_hero_setting_translation_unique_tran")
+  @@index([translatable_id], map: "idx_30149_idx_5dd4b1372c2ac5d3")
+}
+
+model language {
+  id                   BigInt                 @id(map: "idx_30158_primary") @default(autoincrement())
+  code                 String                 @db.VarChar(2)
+  hidden               Boolean
+  created_at           DateTime               @db.Timestamptz(6)
+  updated_at           DateTime?              @db.Timestamptz(6)
+  deleted_at           DateTime?              @db.Timestamptz(6)
+  event_language       event_language[]
+  event_subtitle       event_subtitle[]
+  language_translation language_translation[]
+}
+
+model language_translation {
+  id              BigInt    @id(map: "idx_30163_primary") @default(autoincrement())
+  translatable_id BigInt?
+  name            String    @db.VarChar(50)
+  slug            String    @unique(map: "idx_30163_uniq_e8216272989d9b62") @db.VarChar(80)
+  locale          String    @db.VarChar(255)
+  language        language? @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_e82162722c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_30163_language_translation_unique_translation")
+  @@index([translatable_id], map: "idx_30163_idx_e82162722c2ac5d3")
+}
+
+model menu {
+  id               BigInt             @id(map: "idx_30168_primary") @default(autoincrement())
+  menu_element     menu_element[]
+  menu_translation menu_translation[]
+}
+
+model menu_element {
+  id                       BigInt                     @id(map: "idx_30173_primary") @default(autoincrement())
+  menu_id                  BigInt?
+  icon                     String?                    @db.VarChar(50)
+  link                     String?                    @db.VarChar(255)
+  position                 BigInt
+  custom_link              String?                    @db.VarChar(255)
+  menu                     menu?                      @relation(fields: [menu_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_8caa77c9ccd7e912")
+  menu_element_translation menu_element_translation[]
+
+  @@index([menu_id], map: "idx_30173_idx_8caa77c9ccd7e912")
+}
+
+model menu_element_translation {
+  id              BigInt        @id(map: "idx_30183_primary") @default(autoincrement())
+  translatable_id BigInt?
+  label           String        @db.VarChar(50)
+  slug            String        @unique(map: "idx_30183_uniq_cedb3b23989d9b62") @db.VarChar(80)
+  locale          String        @db.VarChar(255)
+  menu_element    menu_element? @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_cedb3b232c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_30183_menu_element_translation_unique_translation")
+  @@index([translatable_id], map: "idx_30183_idx_cedb3b232c2ac5d3")
+}
+
+model menu_translation {
+  id              BigInt  @id(map: "idx_30188_primary") @default(autoincrement())
+  translatable_id BigInt?
+  name            String  @db.VarChar(50)
+  header          String? @db.VarChar(50)
+  slug            String  @unique(map: "idx_30188_uniq_44d78bcc989d9b62") @db.VarChar(80)
+  locale          String  @db.VarChar(255)
+  menu            menu?   @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_44d78bcc2c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_30188_menu_translation_unique_translation")
+  @@index([translatable_id], map: "idx_30188_idx_44d78bcc2c2ac5d3")
+}
+
+model order {
+  id                                BigInt           @id(map: "idx_30194_primary") @default(autoincrement())
+  user_id                           BigInt?
+  paymentgateway_id                 BigInt?
+  payment_id                        BigInt?          @unique(map: "idx_30194_uniq_2f14a4f44c3a3bb")
+  reference                         String           @db.VarChar(15)
+  note                              String?          @db.VarChar(1000)
+  status                            BigInt
+  ticket_fee                        Decimal          @db.Decimal(10, 2)
+  ticket_price_percentage_cut       BigInt
+  currency_ccy                      String           @db.VarChar(10)
+  currency_symbol                   String           @db.VarChar(10)
+  created_at                        DateTime         @db.Timestamptz(6)
+  updated_at                        DateTime?        @db.Timestamptz(6)
+  deleted_at                        DateTime?        @db.Timestamptz(6)
+  payment_order_payment_idTopayment payment?         @relation("order_payment_idTopayment", fields: [payment_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_2f14a4f44c3a3bb")
+  payment_gateway                   payment_gateway? @relation(fields: [paymentgateway_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_2f14a4f459ca0035")
+  user                              user?            @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_2f14a4f4a76ed395")
+  order_element                     order_element[]
+  payment_payment_order_idToorder   payment?         @relation("payment_order_idToorder")
+
+  @@index([paymentgateway_id], map: "idx_30194_idx_2f14a4f459ca0035")
+  @@index([user_id], map: "idx_30194_idx_2f14a4f4a76ed395")
+}
+
+model order_element {
+  id                 BigInt               @id(map: "idx_30202_primary") @default(autoincrement())
+  order_id           BigInt?
+  eventticket_id     BigInt?
+  unitprice          Decimal?             @db.Decimal(10, 2)
+  quantity           BigInt?
+  deleted_at         DateTime?            @db.Timestamptz(6)
+  event_date_ticket  event_date_ticket?   @relation(fields: [eventticket_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_261baad1182ceb62")
+  order              order?               @relation(fields: [order_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_261baad18d9f6d38")
+  order_ticket       order_ticket[]
+  ticket_reservation ticket_reservation[]
+
+  @@index([eventticket_id], map: "idx_30202_idx_261baad1182ceb62")
+  @@index([order_id], map: "idx_30202_idx_261baad18d9f6d38")
+}
+
+model order_ticket {
+  id              BigInt         @id(map: "idx_30208_primary") @default(autoincrement())
+  orderelement_id BigInt?
+  reference       String         @db.VarChar(20)
+  scanned         Boolean
+  created_at      DateTime       @db.Timestamptz(6)
+  updated_at      DateTime?      @db.Timestamptz(6)
+  deleted_at      DateTime?      @db.Timestamptz(6)
+  order_element   order_element? @relation(fields: [orderelement_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_111e8938ee04f0c1")
+
+  @@index([orderelement_id], map: "idx_30208_idx_111e8938ee04f0c1")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model organizer {
+  id                                   BigInt               @id(map: "idx_30213_primary") @default(autoincrement())
+  user_id                              BigInt?              @unique(map: "idx_30213_uniq_c5eeb9a9a76ed395")
+  country_id                           BigInt?
+  name                                 String               @db.VarChar(25)
+  slug                                 String               @unique(map: "idx_30213_uniq_c5eeb9a9989d9b62") @db.VarChar(35)
+  description                          String?              @db.VarChar(1000)
+  website                              String?              @db.VarChar(50)
+  email                                String?              @db.VarChar(50)
+  phone                                String?              @db.VarChar(50)
+  facebook                             String?              @db.VarChar(100)
+  twitter                              String?              @db.VarChar(100)
+  instagram                            String?              @db.VarChar(100)
+  googleplus                           String?              @db.VarChar(100)
+  linkedin                             String?              @db.VarChar(100)
+  youtubeurl                           String?              @db.VarChar(255)
+  logo_name                            String?              @db.VarChar(50)
+  logo_size                            BigInt?
+  logo_mime_type                       String?              @db.VarChar(50)
+  logo_original_name                   String?              @db.VarChar(1000)
+  logo_dimensions                      String?
+  cover_name                           String?              @db.VarChar(50)
+  cover_size                           BigInt?
+  cover_mime_type                      String?              @db.VarChar(50)
+  cover_original_name                  String?              @db.VarChar(1000)
+  cover_dimensions                     String?
+  created_at                           DateTime             @db.Timestamptz(6)
+  updated_at                           DateTime?            @db.Timestamptz(6)
+  deleted_at                           DateTime?            @db.Timestamptz(6)
+  views                                BigInt
+  showvenuesmap                        Boolean
+  showfollowers                        Boolean
+  showreviews                          Boolean
+  show_event_date_stats_on_scanner_app Boolean?
+  allow_tap_to_check_in_on_scanner_app Boolean?
+  event                                event[]
+  following                            following[]
+  user_organizer_user_idTouser         user?                @relation("organizer_user_idTouser", fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_c5eeb9a9a76ed395")
+  country                              country?             @relation(fields: [country_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_c5eeb9a9f92f3e70")
+  organizer_category                   organizer_category[]
+  payment_gateway                      payment_gateway[]
+  payout_request                       payout_request[]
+  pointofsale                          pointofsale[]
+  scanner                              scanner[]
+  user_user_organizer_idToorganizer    user?                @relation("user_organizer_idToorganizer")
+  venue                                venue[]
+
+  @@index([country_id], map: "idx_30213_idx_c5eeb9a9f92f3e70")
+}
+
+model organizer_category {
+  organizer_id BigInt
+  category_id  BigInt
+  category     category  @relation(fields: [category_id], references: [id], onUpdate: Restrict, map: "fk_bb88f7d715e3697")
+  organizer    organizer @relation(fields: [organizer_id], references: [id], onUpdate: Restrict, map: "fk_bb88f7d79f5d9622")
+
+  @@id([organizer_id, category_id], map: "idx_30235_primary")
+  @@index([category_id], map: "idx_30235_idx_bb88f7d715e3697")
+  @@index([organizer_id], map: "idx_30235_idx_bb88f7d79f5d9622")
+}
+
+model page {
+  id               BigInt             @id(map: "idx_30239_primary") @default(autoincrement())
+  updated_at       DateTime?          @db.Timestamptz(6)
+  page_translation page_translation[]
+}
+
+model page_translation {
+  id              BigInt  @id(map: "idx_30244_primary") @default(autoincrement())
+  translatable_id BigInt?
+  title           String  @db.VarChar(35)
+  slug            String  @unique(map: "idx_30244_uniq_3b97cbf2989d9b62") @db.VarChar(70)
+  content         String?
+  locale          String  @db.VarChar(255)
+  page            page?   @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_3b97cbf22c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_30244_page_translation_unique_translation")
+  @@index([translatable_id], map: "idx_30244_idx_3b97cbf22c2ac5d3")
+}
+
+model payment {
+  id                              BigInt    @id(map: "idx_30251_primary") @default(autoincrement())
+  order_id                        BigInt?   @unique(map: "idx_30251_uniq_1cdddf948d9f6d38")
+  country_id                      BigInt?
+  number                          String?   @db.VarChar(255)
+  description                     String?   @db.VarChar(255)
+  client_email                    String?   @db.VarChar(255)
+  client_id                       String?   @db.VarChar(255)
+  total_amount                    BigInt?
+  currency_code                   String?   @db.VarChar(255)
+  details                         String
+  firstname                       String?   @db.VarChar(20)
+  lastname                        String?   @db.VarChar(20)
+  state                           String?   @db.VarChar(50)
+  city                            String?   @db.VarChar(50)
+  postalcode                      String?   @db.VarChar(50)
+  street                          String?   @db.VarChar(50)
+  street2                         String?   @db.VarChar(50)
+  created_at                      DateTime  @db.Timestamptz(6)
+  updated_at                      DateTime? @db.Timestamptz(6)
+  deleted_at                      DateTime? @db.Timestamptz(6)
+  order_order_payment_idTopayment order?    @relation("order_payment_idTopayment")
+  order_payment_order_idToorder   order?    @relation("payment_order_idToorder", fields: [order_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_1cdddf948d9f6d38")
+  country                         country?  @relation(fields: [country_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_1cdddf94f92f3e70")
+
+  @@index([country_id], map: "idx_30251_idx_1cdddf94f92f3e70")
+}
+
+model payment_gateway {
+  id                BigInt           @id(map: "idx_30270_primary") @default(autoincrement())
+  organizer_id      BigInt?
+  gateway_name      String           @db.VarChar(255)
+  factory_name      String           @db.VarChar(255)
+  config            String
+  name              String           @db.VarChar(50)
+  slug              String           @unique(map: "idx_30270_uniq_9d4780d7989d9b62") @db.VarChar(70)
+  gateway_logo_name String?          @db.VarChar(255)
+  enabled           Boolean
+  number            BigInt?
+  updated_at        DateTime         @db.Timestamptz(6)
+  order             order[]
+  organizer         organizer?       @relation(fields: [organizer_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_9d4780d7876c4dda")
+  payout_request    payout_request[]
+
+  @@index([organizer_id], map: "idx_30270_idx_9d4780d7876c4dda")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model payment_token {
+  hash         String  @id(map: "idx_30277_primary") @db.VarChar(255)
+  details      String?
+  after_url    String?
+  target_url   String
+  gateway_name String  @db.VarChar(255)
+}
+
+model payout_request {
+  id                 BigInt           @id(map: "idx_30283_primary") @default(autoincrement())
+  organizer_id       BigInt?
+  payment_gateway_id BigInt?
+  event_date_id      BigInt?
+  payment            String?
+  reference          String           @db.VarChar(15)
+  note               String?          @db.VarChar(1000)
+  status             BigInt
+  created_at         DateTime         @db.Timestamptz(6)
+  updated_at         DateTime?        @db.Timestamptz(6)
+  deleted_at         DateTime?        @db.Timestamptz(6)
+  payment_gateway    payment_gateway? @relation(fields: [payment_gateway_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_4ae2ae4362890fd5")
+  organizer          organizer?       @relation(fields: [organizer_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_4ae2ae43876c4dda")
+  event_date         event?           @relation(fields: [event_date_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_4ae2ae433dc09fc4")
+
+  @@index([event_date_id], map: "idx_30283_idx_4ae2ae433dc09fc4")
+  @@index([payment_gateway_id], map: "idx_30283_idx_4ae2ae4362890fd5")
+  @@index([organizer_id], map: "idx_30283_idx_4ae2ae43876c4dda")
+}
+
+model pointofsale {
+  id                                    BigInt                  @id(map: "idx_30291_primary") @default(autoincrement())
+  organizer_id                          BigInt?
+  user_id                               BigInt?                 @unique(map: "idx_30291_uniq_5d78d6faa76ed395")
+  name                                  String                  @db.VarChar(25)
+  eventdate_pointofsale                 eventdate_pointofsale[]
+  organizer                             organizer?              @relation(fields: [organizer_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_5d78d6fa876c4dda")
+  user_pointofsale_user_idTouser        user?                   @relation("pointofsale_user_idTouser", fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_5d78d6faa76ed395")
+  user_user_pointofsale_idTopointofsale user?                   @relation("user_pointofsale_idTopointofsale")
+
+  @@index([organizer_id], map: "idx_30291_idx_5d78d6fa876c4dda")
+}
+
+model review {
+  id         BigInt    @id(map: "idx_30296_primary") @default(autoincrement())
+  event_id   BigInt?
+  user_id    BigInt?
+  rating     BigInt
+  headline   String?   @db.VarChar(100)
+  slug       String    @unique(map: "idx_30296_uniq_3d9d9182989d9b62") @db.VarChar(120)
+  details    String?   @db.VarChar(500)
+  created_at DateTime  @db.Timestamptz(6)
+  updated_at DateTime? @db.Timestamptz(6)
+  deleted_at DateTime? @db.Timestamptz(6)
+  visible    Boolean
+  event      event?    @relation(fields: [event_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_3d9d918271f7e88b")
+  user       user?     @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_3d9d9182a76ed395")
+
+  @@index([event_id], map: "idx_30296_idx_3d9d918271f7e88b")
+  @@index([user_id], map: "idx_30296_idx_3d9d9182a76ed395")
+}
+
+model scanner {
+  id                            BigInt              @id(map: "idx_30305_primary") @default(autoincrement())
+  organizer_id                  BigInt?
+  user_id                       BigInt?             @unique(map: "idx_30305_uniq_241a84b0a76ed395")
+  name                          String              @db.VarChar(25)
+  eventdate_scanner             eventdate_scanner[]
+  organizer                     organizer?          @relation(fields: [organizer_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_241a84b0876c4dda")
+  user_scanner_user_idTouser    user?               @relation("scanner_user_idTouser", fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_241a84b0a76ed395")
+  user_user_scanner_idToscanner user?               @relation("user_scanner_idToscanner")
+
+  @@index([organizer_id], map: "idx_30305_idx_241a84b0876c4dda")
+}
+
+model settings {
+  id    BigInt  @id(map: "idx_30310_primary") @default(autoincrement())
+  key   String  @db.VarChar(50)
+  value String? @db.VarChar(500)
+}
+
+model thread {
+  id              String    @id(map: "idx_30317_primary") @db.VarChar(255)
+  permalink       String    @db.VarChar(255)
+  is_commentable  Boolean
+  num_comments    BigInt
+  last_comment_at DateTime? @db.Timestamptz(6)
+  comment         comment[]
+}
+
+model ticket_reservation {
+  id                BigInt             @id(map: "idx_30323_primary") @default(autoincrement())
+  eventticket_id    BigInt?
+  user_id           BigInt?
+  orderelement_id   BigInt?
+  quantity          BigInt?
+  created_at        DateTime           @db.Timestamptz(6)
+  expires_at        DateTime           @db.Timestamptz(6)
+  deleted_at        DateTime?          @db.Timestamptz(6)
+  event_date_ticket event_date_ticket? @relation(fields: [eventticket_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_716dea9f182ceb62")
+  user              user?              @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_716dea9fa76ed395")
+  order_element     order_element?     @relation(fields: [orderelement_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_716dea9fee04f0c1")
+
+  @@index([eventticket_id], map: "idx_30323_idx_716dea9f182ceb62")
+  @@index([user_id], map: "idx_30323_idx_716dea9fa76ed395")
+  @@index([orderelement_id], map: "idx_30323_idx_716dea9fee04f0c1")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model user {
+  id                                           BigInt                 @id(map: "idx_30328_primary") @default(autoincrement())
+  organizer_id                                 BigInt?                @unique(map: "idx_30328_uniq_d01c6a22876c4dda")
+  scanner_id                                   BigInt?                @unique(map: "idx_30328_uniq_d01c6a2267c89e33")
+  pointofsale_id                               BigInt?                @unique(map: "idx_30328_uniq_d01c6a2218e07bf3")
+  isorganizeronhomepageslider_id               BigInt?
+  country_id                                   BigInt?
+  username                                     String                 @db.VarChar(180)
+  username_canonical                           String                 @unique(map: "idx_30328_uniq_d01c6a2292fc23a8") @db.VarChar(180)
+  email                                        String                 @db.VarChar(180)
+  email_canonical                              String                 @unique(map: "idx_30328_uniq_d01c6a22a0d96fbf") @db.VarChar(180)
+  enabled                                      Boolean
+  salt                                         String?                @db.VarChar(255)
+  password                                     String                 @db.VarChar(255)
+  last_login                                   DateTime?              @db.Timestamptz(6)
+  confirmation_token                           String?                @unique(map: "idx_30328_uniq_d01c6a22c05fb297") @db.VarChar(180)
+  password_requested_at                        DateTime?              @db.Timestamptz(6)
+  roles                                        String
+  gender                                       String?                @db.VarChar(10)
+  firstname                                    String?                @db.VarChar(20)
+  lastname                                     String?                @db.VarChar(20)
+  slug                                         String                 @unique(map: "idx_30328_uniq_d01c6a22989d9b62") @db.VarChar(30)
+  street                                       String?                @db.VarChar(50)
+  street2                                      String?                @db.VarChar(50)
+  city                                         String?                @db.VarChar(50)
+  state                                        String?                @db.VarChar(50)
+  postalcode                                   String?                @db.VarChar(15)
+  phone                                        String?                @db.VarChar(50)
+  birthdate                                    DateTime?              @db.Date
+  avatar_name                                  String?                @db.VarChar(50)
+  avatar_size                                  BigInt?
+  avatar_mime_type                             String?                @db.VarChar(50)
+  avatar_original_name                         String?                @db.VarChar(1000)
+  avatar_dimensions                            String?
+  created_at                                   DateTime               @db.Timestamptz(6)
+  updated_at                                   DateTime?              @db.Timestamptz(6)
+  deleted_at                                   DateTime?              @db.Timestamptz(6)
+  facebook_id                                  String?                @db.VarChar(255)
+  facebook_access_token                        String?                @db.VarChar(255)
+  google_id                                    String?                @db.VarChar(255)
+  google_access_token                          String?                @db.VarChar(255)
+  api_key                                      String?                @unique(map: "idx_30328_uniq_d01c6a22c912ed9d") @db.VarChar(255)
+  facebook_profile_picture                     String?                @db.VarChar(1000)
+  cart_element                                 cart_element[]
+  comment                                      comment[]
+  favorites                                    favorites[]
+  following                                    following[]
+  order                                        order[]
+  organizer_organizer_user_idTouser            organizer?             @relation("organizer_user_idTouser")
+  pointofsale_pointofsale_user_idTouser        pointofsale?           @relation("pointofsale_user_idTouser")
+  review                                       review[]
+  scanner_scanner_user_idTouser                scanner?               @relation("scanner_user_idTouser")
+  ticket_reservation                           ticket_reservation[]
+  pointofsale_user_pointofsale_idTopointofsale pointofsale?           @relation("user_pointofsale_idTopointofsale", fields: [pointofsale_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_d01c6a2218e07bf3")
+  scanner_user_scanner_idToscanner             scanner?               @relation("user_scanner_idToscanner", fields: [scanner_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_d01c6a2267c89e33")
+  organizer_user_organizer_idToorganizer       organizer?             @relation("user_organizer_idToorganizer", fields: [organizer_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_d01c6a22876c4dda")
+  homepage_hero_setting                        homepage_hero_setting? @relation(fields: [isorganizeronhomepageslider_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_d01c6a22f2709ff9")
+  country                                      country?               @relation(fields: [country_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_d01c6a22f92f3e70")
+  vote                                         vote[]
+
+  @@index([isorganizeronhomepageslider_id], map: "idx_30328_idx_d01c6a22f2709ff9")
+  @@index([country_id], map: "idx_30328_idx_d01c6a22f92f3e70")
+}
+
+model venue {
+  id                BigInt              @id(map: "idx_30355_primary") @default(autoincrement())
+  organizer_id      BigInt?
+  type_id           BigInt?
+  country_id        BigInt?
+  seatedguests      BigInt?
+  standingguests    BigInt?
+  neighborhoods     String?             @db.VarChar(100)
+  foodbeverage      String?             @db.VarChar(500)
+  pricing           String?             @db.VarChar(500)
+  availibility      String?             @db.VarChar(500)
+  hidden            Boolean
+  showmap           Boolean
+  quoteform         Boolean
+  street            String              @db.VarChar(50)
+  street2           String?             @db.VarChar(50)
+  city              String              @db.VarChar(50)
+  state             String              @db.VarChar(50)
+  postalcode        String              @db.VarChar(15)
+  lat               String?             @db.VarChar(255)
+  lng               String?             @db.VarChar(255)
+  listedondirectory Boolean
+  contactemail      String?             @db.VarChar(50)
+  created_at        DateTime            @db.Timestamptz(6)
+  updated_at        DateTime?           @db.Timestamptz(6)
+  deleted_at        DateTime?           @db.Timestamptz(6)
+  event             event[]
+  organizer         organizer?          @relation(fields: [organizer_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_4bac2c61876c4dda")
+  venue_type        venue_type?         @relation(fields: [type_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_4bac2c61c54c8c93")
+  country           country?            @relation(fields: [country_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_4bac2c61f92f3e70")
+  venue_amenity     venue_amenity[]
+  venue_image       venue_image[]
+  venue_translation venue_translation[]
+
+  @@index([organizer_id], map: "idx_30355_idx_4bac2c61876c4dda")
+  @@index([type_id], map: "idx_30355_idx_4bac2c61c54c8c93")
+  @@index([country_id], map: "idx_30355_idx_4bac2c61f92f3e70")
+}
+
+model venue_amenity {
+  venue_id   BigInt
+  amenity_id BigInt
+  amenity    amenity @relation(fields: [amenity_id], references: [id], onUpdate: Restrict, map: "fk_8a89d31e45463477")
+  venue      venue   @relation(fields: [venue_id], references: [id], onUpdate: Restrict, map: "fk_8a89d31eb9d15cec")
+
+  @@id([venue_id, amenity_id], map: "idx_30369_primary")
+  @@index([amenity_id], map: "idx_30369_idx_8a89d31e45463477")
+  @@index([venue_id], map: "idx_30369_idx_8a89d31eb9d15cec")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model venue_image {
+  id                  BigInt    @id(map: "idx_30373_primary") @default(autoincrement())
+  venue_id            BigInt?
+  image_name          String?   @db.VarChar(50)
+  image_size          BigInt?
+  image_mime_type     String?   @db.VarChar(50)
+  image_original_name String?   @db.VarChar(1000)
+  image_dimensions    String?
+  position            BigInt?
+  updated_at          DateTime? @db.Timestamptz(6)
+  venue               venue?    @relation(fields: [venue_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_f3ee32a540a73eba")
+
+  @@index([venue_id], map: "idx_30373_idx_f3ee32a540a73eba")
+}
+
+model venue_translation {
+  id              BigInt  @id(map: "idx_30383_primary") @default(autoincrement())
+  translatable_id BigInt?
+  name            String  @db.VarChar(50)
+  description     String
+  slug            String  @unique(map: "idx_30383_uniq_3a06bd63989d9b62") @db.VarChar(80)
+  locale          String  @db.VarChar(255)
+  venue           venue?  @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_3a06bd632c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_30383_venue_translation_unique_translation")
+  @@index([translatable_id], map: "idx_30383_idx_3a06bd632c2ac5d3")
+}
+
+model venue_type {
+  id                     BigInt                   @id(map: "idx_30390_primary") @default(autoincrement())
+  hidden                 Boolean
+  created_at             DateTime                 @db.Timestamptz(6)
+  updated_at             DateTime?                @db.Timestamptz(6)
+  deleted_at             DateTime?                @db.Timestamptz(6)
+  venue                  venue[]
+  venue_type_translation venue_type_translation[]
+}
+
+model venue_type_translation {
+  id              BigInt      @id(map: "idx_30395_primary") @default(autoincrement())
+  translatable_id BigInt?
+  name            String      @db.VarChar(50)
+  slug            String      @unique(map: "idx_30395_uniq_9fd9786f989d9b62") @db.VarChar(80)
+  locale          String      @db.VarChar(255)
+  venue_type      venue_type? @relation(fields: [translatable_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_9fd9786f2c2ac5d3")
+
+  @@unique([translatable_id, locale], map: "idx_30395_venue_type_translation_unique_translation")
+  @@index([translatable_id], map: "idx_30395_idx_9fd9786f2c2ac5d3")
+}
+
+model vote {
+  id         BigInt   @id(map: "idx_30400_primary") @default(autoincrement())
+  comment_id BigInt?
+  voter_id   BigInt?
+  created_at DateTime @db.Timestamptz(6)
+  value      BigInt
+  user       user?    @relation(fields: [voter_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_79f390febb4b8ad")
+  comment    comment? @relation(fields: [comment_id], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "fk_79f390ff8697d13")
+
+  @@index([voter_id], map: "idx_30400_idx_79f390febb4b8ad")
+  @@index([comment_id], map: "idx_30400_idx_79f390ff8697d13")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model migration_versions {
+  version     String   @id(map: "idx_30404_primary") @db.VarChar(14)
+  executed_at DateTime @db.Timestamptz(6)
+}

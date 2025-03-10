@@ -1,0 +1,43 @@
+[
+    {
+        "id": "1",
+        "name": "john_doe",
+        "email": "john.doe@example.com",
+        "registrationdate": "2023-01-15T08:30:00Z",
+        "phoneNo": "1234567890",
+        "status": "active"
+        
+    },
+    {
+        "id": "2",
+        "name": "jane_smith",
+        "email": "jane.smith@example.com",
+        "registrationdate": "2023-02-20T10:45:00Z",
+        "phoneNo": "1234567890",
+        "status": "inactive"
+    },
+    {
+        "id": "3",
+        "name": "alice_jones",
+        "email": "alice.jones@example.com",
+        "registrationdate": "2023-03-05T14:20:00Z",
+        "phoneNo": "1234567890",
+        "status": "active"
+    },
+    {
+        "id": "4",
+        "name": "bob_brown",
+        "email": "bob.brown@example.com",
+        "registrationdate": "2023-04-10T09:15:00Z",
+        "phoneNo": "1234567890",
+        "status": "inactive"
+    },
+    {
+        "id": "5",
+        "name": "bob_bsis",
+        "email": "bob.bsis@example.com",
+        "registrationdate": "2023-04-10T09:15:00Z",
+        "phoneNo": "1234567890",
+        "status": "blocked"
+    }
+]
