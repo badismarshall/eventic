@@ -114,7 +114,7 @@ export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
               <FormControl>
                 <Input
                     id="confirmPassword"
-                    placeholder="Entrer votre mot de pass"
+                    placeholder="Confirmer votre mot de pass"
                     type="password"
                     autoCapitalize="none"
                     autoCorrect="off"
