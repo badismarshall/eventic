@@ -15,35 +15,71 @@ export const metadata: Metadata = {
   }
 
 
-export default async function AccountPage() {
+export default async function SettingsAccountPage() {
     return(
         <div>
           <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
             <div className="flex items-center justify-between space-y-2">
               <div>
                 <h2 className="text-2xl font-bold tracking-tight">Gérer Votre Compte! </h2>
-                <p className="text-muted-foreground">
+                {/* <p className="text-muted-foreground">
                 Changer votre mot de passe!
-                </p>
+                </p> */}
               </div>
             </div>
           <div >
             <Card className="max-w-4xl">
-              <CardHeader>
+              {/* <CardHeader>
                   <CardTitle>Changer votre mot de passe</CardTitle>
-              </CardHeader>
+              </CardHeader> */}
               <CardContent>
-                <form className="space-y-6">
+                <form className="space-y-6 pt-3">
                   <div className="space-y-1">
-                    <Label>Mot de passe actuel</Label>
+                    <Label>Email</Label>
                     <Input placeholder="" />
                   </div>
                   <div className="space-y-1">
-                  <Label>Nouveau mot de passe</Label>
+                  <Label>Nom d'utilisateur</Label>
                   <Input placeholder="" />
                   </div>
                   <div className="space-y-1">
-                    <Label>Répéter le nouveau mot de passe</Label>
+                    <Label>Prénom</Label>
+                    <Input placeholder="" />
+                  </div>
+                  <div className="space-y-1">
+                    <Label>Nom</Label>
+                    <Input placeholder="" />
+                  </div>
+                  <div className="space-y-1">
+                    <Label>Numéro du Tel</Label>
+                    <Input placeholder="" />
+                  </div>
+                  <div className="space-y-1">
+                    <Label>Date de naissance</Label>
+                    <Input placeholder="" />
+                  </div>
+                  <div className="space-y-1">
+                    <Label>Photo de profile</Label>
+                    <Input placeholder="" />
+                  </div>
+                  <div className="space-y-1">
+                    <Label>Adresse de la rue</Label>
+                    <Input placeholder="" />
+                  </div>
+                  <div className="space-y-1">
+                    <Label>Cité</Label>
+                    <Input placeholder="" />
+                  </div>
+                  <div className="space-y-1">
+                    <Label>Code Postale</Label>
+                    <Input placeholder="" />
+                  </div>
+                  <div className="space-y-1">
+                    <Label>Code Postale</Label>
+                    <Input placeholder="" />
+                  </div>
+                  <div className="space-y-1">
+                    <Label>État</Label>
                     <Input placeholder="" />
                   </div>
                 </form>

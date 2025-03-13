@@ -13,51 +13,14 @@ import {
   ScanQrCode,
   MapPinHouse,
   Star,
-  Euro} 
+  Euro,
+  ShoppingCart,
+  FileHeart,
+  StarIcon,
+  UserRoundCheck} 
   from "lucide-react"
 
-// export const adminSidebarItems = [
-//     {
-//       title: 'Tableau de bord',
-//       url: '/dashboard/administrator',
-//       icon: Home,
-//     },
-//     {
-//       title: 'Événements',
-//       url: '/dashboard/administrator/events',
-//       icon: TicketPercent,
-//     },
-//     {
-//       title: 'Statistique',
-//       url: '/dashboard/administrator/analytics',
-//       icon: ChartNoAxesCombined,
-//     },
-//     {
-//       title: 'Utilisateurs',
-//       url: '/dashboard/administrator/users',
-//       icon: Users
-//     },
-//     {
-//       title: 'Commandes',
-//       url: '/dashboard/administrator/orders',
-//       icon: BringToFront,
-//     },
-//     {
-//       title: 'Demandes de paiement',
-//       url: '/dashboard/administrator/payment-requests',
-//       icon: HandCoins,
-//     },
-//     {
-//       title: 'Rapports',
-//       url: '/dashboard/a1dministrator/reports',
-//       icon: TicketsPlane,
-//     },
-//     {
-//       title: 'Compte',
-//       url: '/dashboard/administrator/profile',
-//       icon: UserCog,
-//     }
-//   ]
+
 
 export const adminSidebarItems = [
   {
@@ -276,4 +239,69 @@ export const organizerSidebarItems = [
         },
       ]
     }
+]
+
+export const pointofsaleSidebarItems = [
+  {
+    title: 'Événements en vente',
+    url: '/dashboard/pointofsale',
+    icon: TicketPercent,
+  },
+  {
+    title: 'Mes commandes',
+    url: '/dashboard/pointofsale/my-orders',
+    icon: BringToFront,
+  },
+]
+
+export const scannerSidebarItems = [
+  {
+    title: 'Liste des événements',
+    url: '/dashboard/scanner',
+    icon: TicketPercent,
+  },
+]
+
+export const attendeeSidebarItems = [
+  {
+    title: 'Mes billets',
+    url: '/dashboard/attendee/my-tickets',
+    icon: TicketPercent,
+  },
+  {
+    title: 'Mon panier',
+    url: '/dashboard/attendee/cart',
+    icon: ShoppingCart,
+  },
+  {
+    title: 'Mes favoris',
+    url: '/dashboard/attendee/my-favorites',
+    icon: FileHeart,
+  },
+  {
+    title: 'Mes avis',
+    url: '/dashboard/attendee/my-reviews',
+    icon: StarIcon,
+  },
+  {
+    title: 'Mes abonnements',
+    url: '/dashboard/attendee/following',
+    icon: UserRoundCheck,
+  },
+  {
+    title: 'Compte',
+    url: '/dashboard/attendee/account',
+    icon: UserCog,
+    isActive: false,
+    items: [
+      {
+        title: 'Paramètres',
+        url: '/dashboard/attendee/account/settings',
+      },
+      {
+        title: 'Changer le mot de passe',
+        url: '/dashboard/change-password',
+      }
+    ]
+  }
 ]

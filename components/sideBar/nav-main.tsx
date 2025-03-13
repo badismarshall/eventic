@@ -52,7 +52,7 @@ export function NavMain({
                           <TooltipTrigger asChild>
                               <SidebarMenuItem key={item.title}>
                                   <SidebarMenuButton asChild>
-                                      <a href={item.url} className={cn(isActive ? 'bg-secondary' : '',"transition-colors hover:text-foreground")}>
+                                      <a href={item.url} className={cn(isActive ? 'bg-primary' : '',"transition-colors hover:text-foreground")}>
                                           {item.icon && <item.icon />}    
                                           <span>{item.title}</span>
                                       </a>
@@ -83,7 +83,7 @@ export function NavMain({
                                   return (
                                     <SidebarMenuSubItem key={subItem.title}>
                                     <SidebarMenuSubButton asChild>
-                                        <a href={subItem.url} className={cn(isActive ? 'bg-secondary' : '',"transition-colors hover:text-foreground")}>
+                                        <a href={subItem.url} className={cn(isActive ? 'bg-primary' : '',"transition-colors hover:text-foreground")}>
                                         <span>{subItem.title}</span>
                                         </a>
                                     </SidebarMenuSubButton>

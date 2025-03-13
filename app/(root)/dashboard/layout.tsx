@@ -3,6 +3,7 @@ import MainSidebar from "@/components/sideBar/main-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { cookies } from "next/headers"
+import HeaderInsetSidebar from "@/components/sideBar/header-inset-sidebare";
 
 export default async function RootLayout({
     children,
@@ -18,6 +19,7 @@ export default async function RootLayout({
           <SidebarProvider defaultOpen={defaultOpen}>
             <MainSidebar />
             <SidebarInset>
+                <HeaderInsetSidebar />
                 {children}
               </SidebarInset>
           </SidebarProvider>
