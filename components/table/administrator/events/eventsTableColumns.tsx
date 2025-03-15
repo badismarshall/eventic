@@ -7,7 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 
 import { labels, priorities, statuses } from "./events-data-table-datatest"
 import { Task } from "./events-data-table-schema"
-import { DataTableColumnHeader } from "./events-data-table-column-header"
+import { DataTableColumnHeader } from "../data-table-column-header"
 import { DataTableRowActions } from "./events-data-table-row-actions"
 import { Progress } from "@/components/ui/progress"
 

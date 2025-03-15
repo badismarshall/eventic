@@ -34,6 +34,7 @@
     "cmdk": "^1.0.0",
     "date-fns": "^4.1.0",
     "framer-motion": "^11.11.10",
+    "input-otp": "^1.4.2",
     "lucide-react": "^0.436.0",
     "next": "^15.2.2",
     "next-themes": "^0.3.0",
@@ -62,7 +63,7 @@
   "@snaplet/seed": {
     "config": "prisma\\seed\\seed.config.ts"
   },
-   "overrides": {
-      "react-is": "^19.0.0-rc-69d4b800-20241021"
+  "overrides": {
+    "react-is": "^19.0.0-rc-69d4b800-20241021"
   }
 }

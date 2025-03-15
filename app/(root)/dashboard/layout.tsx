@@ -20,7 +20,9 @@ export default async function RootLayout({
             <MainSidebar />
             <SidebarInset>
                 <HeaderInsetSidebar />
-                {children}
+                <div className="gap-4 p-4 sm:px-6 sm:py-4 md:gap-8">
+                  {children}
+                </div>
               </SidebarInset>
           </SidebarProvider>
         </TooltipProvider>
