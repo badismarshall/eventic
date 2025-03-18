@@ -48,7 +48,7 @@ export default async function AccountPage() {
                   </div>
                 </form>
               </CardContent>
-              <CardFooter className="px-6 py-4">
+              <CardFooter className="px-6 py-4 justify-end">
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button>Confirmer</Button>

@@ -23,7 +23,7 @@ const getRoleSpecificSidebar = (role: string) => {
 };
 
 export default function MainSidebar ({ ...props }: React.ComponentProps<typeof Sidebar>) {
-    const userrole: string = 'attendee';
+    const userrole: string = 'admin';
   return (
     <AppSidebar {...props}>
         {

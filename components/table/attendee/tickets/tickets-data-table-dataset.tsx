@@ -6,7 +6,7 @@ export const statuses = [
     },
     {
         value: "Awaiting payment",
-        label: "EAP",
+        label: "EAP", // En attente de paiement
         color: "yellow"
     },
     {

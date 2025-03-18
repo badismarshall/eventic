@@ -9,6 +9,7 @@ import { format, parseISO } from "date-fns"
 import { fr } from 'date-fns/locale';
 import { statuses } from "./tickets-data-table-dataset"
 import { Badge } from "@/components/ui/badge"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export const columns: ColumnDef<Ticket>[] = [{
     id: 'select',
@@ -44,9 +45,25 @@ export const columns: ColumnDef<Ticket>[] = [{
     {
         accessorKey: 'event',
         header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Événement" className="text-center"/>
+            <DataTableColumnHeader column={column} title="Événement" />
         ),
-        cell: ({ row }) => <div>{row.getValue("event")}</div>,
+        cell: ({ row }) => {
+            return (
+                <div className="flex space-x-2">
+                <Avatar className="w-9 h-9 rounded-lg">
+                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col">
+                  <span className="max-w-[500px] truncate font-medium">
+                    {row.getValue("event")}
+                  </span>
+                  <span className="text-muted-foreground">Organizer</span>
+                </div>
+              </div>
+            )
+        },
+        enableSorting: false,
     },
     {
         accessorKey: 'date',
@@ -61,11 +78,18 @@ export const columns: ColumnDef<Ticket>[] = [{
         enableSorting: false,
     },
     {
+        accessorKey: 'quantity',
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="Quantité" />
+        ),
+        cell: ({ row }) => <div className="w-[80px] text-center">{row.getValue("quantity")}</div>,
+    },
+    {
         accessorKey: 'price',
         header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Prix" />
+            <DataTableColumnHeader column={column} title="Prix (Dinar DZ)" className="text-center" />
         ),
-        cell: ({ row }) => <div className="w-[80px]">{row.getValue("price")}</div>,
+        cell: ({ row }) => <div className="w-[80px] text-primary text-center">{row.getValue("price")}</div>,
         enableSorting: false,
     },
     {
@@ -76,7 +100,7 @@ export const columns: ColumnDef<Ticket>[] = [{
         cell: ({ row }) => {
             const className = ['bg-red-400', 'bg-green-400', 'bg-yellow-400']
             const status = statuses.find((status) => status.value === row.original.status)
-            
+
             return (
                 <div className="w-[80px]">{status && <Badge variant="default" className={`bg-${status.color}-400`} >{status.label}</Badge>}</div>
             )
@@ -84,9 +108,7 @@ export const columns: ColumnDef<Ticket>[] = [{
     },
     {
         id: 'actions',
-        header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Actions" />
-        ),
-        cell: ({ row }) => <DataTableRowActions row={row} />,
+        cell: ({ row }) => <DataTableRowActions row={row}/>,
+        enableHiding: false, 
     }
 ]

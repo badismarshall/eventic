@@ -6,6 +6,7 @@ export const ticketsSchema = z.object({
     event: z.string(),
     date: z.string(),
     price: z.string(),
+    quantity: z.string(),
     status: z.string(),
 })
 
