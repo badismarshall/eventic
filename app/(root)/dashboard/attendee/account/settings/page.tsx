@@ -248,7 +248,7 @@ export default function SettingsAccountPage() {
                           <DialogHeader>
                             <DialogTitle>Vous etes sur !</DialogTitle>
                             <DialogDescription>
-                              Vous etes sur de vouloir changer vos informations
+                              Vous etes sur de vouloir changer vos informations.
                             </DialogDescription>
                           </DialogHeader>
 

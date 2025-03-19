@@ -17,12 +17,16 @@ import {
   ShoppingCart,
   FileHeart,
   StarIcon,
-  UserRoundCheck} 
-  from "lucide-react"
+  UserRoundCheck,
+  Bell,
+  Gift,
+  Images
+}  from "lucide-react"
+import { title } from "process"
 
 
 
-export const adminSidebarItems = [
+export const adminSidebarItemsGeneralSetting = [
   {
     title: 'Tableau de bord',
     url: '/dashboard/administrator',
@@ -157,6 +161,26 @@ export const adminSidebarItems = [
   }
 ]
 
+export const adminSideBarItemsPromotionManagement = [
+  {
+    title: 'Envoyée notification',
+    url: '/dashboard/administrator/push-notification',
+    icon: Bell,
+    isActive: false,
+  },
+  {
+    title: 'Coupons',
+    url: '/dashboard/administrator/coupon',
+    icon: Gift,
+    isActive: false
+  },
+  {
+    title: 'Bannières',
+    url: '/dashboard/administrator/banner',
+    icon: Images,
+    isActive: false
+  }
+]
 
 export const organizerSidebarItems = [
     {

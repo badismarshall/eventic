@@ -21,8 +21,24 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip"
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
+type NavMainProps = {
+  items: {
+    title: string;
+    url: string;
+    icon?: LucideIcon;
+    isActive?: boolean;
+    items?: {
+      title: string;
+      url: string;
+    }[];
+  }[];
+  groupeLabel?: string;
+};
+
+
 export function NavMain({
   items,
+  groupeLabel
 }: {
   items: {
     title: string
@@ -33,13 +49,15 @@ export function NavMain({
       title: string
       url: string
     }[]
-  }[]
+  }[];
+  groupeLabel : string
 }) {
+
   const pathname = usePathname()
 
   return (
     <SidebarGroup>
-      <SidebarGroupLabel>Eventic</SidebarGroupLabel>
+      <SidebarGroupLabel>{ groupeLabel }</SidebarGroupLabel>
       <SidebarMenu>
         {items.map((item) => {
 
