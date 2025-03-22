@@ -1,4 +1,6 @@
 
+import { description } from "@/app/(root)/dashboard/administrator/page"
+import { title } from "process"
 import * as z from "zod"
 
 export const SigninValidation = z.object({
@@ -31,7 +33,25 @@ export const ProfileFormValidation = z.object({
 })
 
 export const ChangePasswordValidation = z.object({
-  currentPassword: z.string().min(8, { message: "Password must be at least 8 characters." }),
-  newPassword: z.string().min(8, { message: "Password must be at least 8 characters." }),
-  confirmPassword: z.string().min(8, { message: "Password must be at least 8 characters." }),
+  currentPassword: z.string().min(8, { message: "Le mot de pass doit être supérieur à 5 caractères." }),
+  newPassword: z.string().min(8, { message: "Le nouveau mot de pass doit être supérieur à 5 caractères." }),
+  confirmPassword: z.string().min(8),
+})
+
+export const PushNotificationValidation = z.object({
+    title: z.string().min(5, {message: "Le titre doit être supérieur à 5 caractères."}),
+    description: z.string().min(5)
+})
+
+export const AddNewCouponValidation = z.object({
+  couponType: z.string().min(3),
+  couponTitle: z.string().min(3),
+  couponCode: z.string().min(3),
+  LimitForSameUser: z.string().min(3),
+  DiscountType: z.string().min(3),
+  DiscountPercent : z.string().min(3),
+  MinimumPurchase : z.number(),
+  MaximumPurchase : z.number(),
+  StartDate: z.date(),
+  ExpireDate: z.date()
 })

@@ -41,9 +41,6 @@ export default function AccountPage() {
             </div>
           <div >
             <Card className="max-w-4xl">
-              {/* <CardHeader>
-                  <CardTitle>Changer votre mot de passe</CardTitle>
-              </CardHeader> */}
               <CardContent>
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 pt-3" >
@@ -92,7 +89,7 @@ export default function AccountPage() {
                         </FormItem>
                       )}
                     />
-                    <CardFooter className="px-6 py-4 justify-end">
+                    <CardFooter className="px-6 py-2 justify-end">
                       <Dialog>
                         <DialogTrigger asChild>
                           <Button type="submit">Confirmer</Button>

@@ -22,7 +22,6 @@ import {
   Gift,
   Images
 }  from "lucide-react"
-import { title } from "process"
 
 
 
@@ -163,7 +162,7 @@ export const adminSidebarItemsGeneralSetting = [
 
 export const adminSideBarItemsPromotionManagement = [
   {
-    title: 'Envoyée notification',
+    title: 'Envoyée des Notification',
     url: '/dashboard/administrator/push-notification',
     icon: Bell,
     isActive: false,

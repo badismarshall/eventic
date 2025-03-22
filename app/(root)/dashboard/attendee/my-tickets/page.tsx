@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   }
 
 // Simulate a database read for tasks.
-async function getTasks() {
+async function getTickets() {
   const data = await fs.readFile(
     path.join(process.cwd(), "/components/table/attendee/tickets/tickets-data.json")
   )
@@ -26,7 +26,7 @@ async function getTasks() {
 }
 
 export default async function  MyticketPage ()  {
-    const tickets = await getTasks()
+    const tickets = await getTickets()
 
   return (
       <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
