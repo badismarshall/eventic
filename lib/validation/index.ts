@@ -49,9 +49,13 @@ export const AddNewCouponValidation = z.object({
   couponCode: z.string().min(3),
   LimitForSameUser: z.string().min(3),
   DiscountType: z.string().min(3),
-  DiscountPercent : z.string().min(3),
+  DiscountPercent : z.number(),
   MinimumPurchase : z.number(),
   MaximumPurchase : z.number(),
   StartDate: z.date(),
   ExpireDate: z.date()
+})
+
+export const AddBannerValidation = z.object({
+  title: z.string().min(5, {message: "Le titre doit être supérieur à 5 caractères."}),
 })

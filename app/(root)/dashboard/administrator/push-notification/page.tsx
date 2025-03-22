@@ -16,6 +16,8 @@ import { ticketsSchema } from "@/components/table/attendee/tickets/tickets-data-
 import { columns } from "@/components/table/attendee/tickets/ticketsTableColumns"
 import { DataTableToolbar } from "@/components/table/attendee/tickets/tickets-data-table-toolbar"
 import { useEffect, useState } from "react";
+import { FileIcon } from "lucide-react";
+import { Label } from "@/components/ui/label";
 
 type PushNotificationFormValues = z.infer<typeof PushNotificationValidation>
 
@@ -60,7 +62,7 @@ export default  function  PushNotificationPage (){
                     </p>
                 </div>
             </div>
-            <Card className="max-w-5xl">
+            <Card className="">
                 <CardContent>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -88,7 +90,7 @@ export default  function  PushNotificationPage (){
                                         <FormItem>
                                             <FormLabel>Description</FormLabel>
                                             <FormControl>
-                                                <Textarea {...field} placeholder="Description..." className="min-h-32"/>
+                                                <Textarea {...field} placeholder="Description..." className="min-h-[156px]"/>
                                             </FormControl>
                                             <FormDescription>
                                                 Une description pour votre notification.
@@ -98,8 +100,21 @@ export default  function  PushNotificationPage (){
                                 />
                                 </div>
                                 <div className="flex-1 pt-3 justify-center">
-                                    <Card className="flex justify-center">
-                                        Bannière de notification
+                                <div>Bannière de notification</div>
+                                <Card className="mt-3">
+                                    <CardContent className="p-6 space-y-4">
+                                        <div className="border-2 border-dashed border-gray-200 rounded-lg flex flex-col gap-1 p-6 items-center">
+                                        <FileIcon className="w-12 h-12" />
+                                        <span className="text-sm font-medium text-gray-500">Drag and drop a file or click to browse</span>
+                                        <span className="text-xs text-gray-500">PDF, image, video, or audio</span>
+                                        </div>
+                                        <div className="space-y-2 text-sm">
+                                        <Label htmlFor="file" className="text-sm font-medium">
+                                            Fichier
+                                        </Label>
+                                        <Input id="file" type="file" placeholder="Fichier" accept="image/*" />
+                                        </div>
+                                    </CardContent>
                                     </Card>
                                 </div>
                             </div>

@@ -13,6 +13,8 @@ import { format } from "date-fns"
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils"
+import { fr } from 'date-fns/locale';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 
 type AddCouponFormValues = z.infer<typeof AddNewCouponValidation>
@@ -27,8 +29,9 @@ export default function CouponPage()  {
       couponCode: "",
       LimitForSameUser: "",
       DiscountType: "",
-      DiscountPercent:  "",
+      DiscountPercent:  2,
       MinimumPurchase: 2,
+      MaximumPurchase: 2,
       StartDate: new Date(), 
       ExpireDate: new Date() 
     }
@@ -49,10 +52,10 @@ export default function CouponPage()  {
                         </p>
                     </div>
                 </div>
-                <Card className="max-w-5xl">
+                <Card className=" pt-3">
                   <CardContent>
                       <Form {...form}>
-                        <form onSubmit={form.handleSubmit(onSubmit)} className="p-3">
+                        <form onSubmit={form.handleSubmit(onSubmit)}>
                           <FormField
                             control={form.control}
                              name="couponTitle"
@@ -77,7 +80,23 @@ export default function CouponPage()  {
                                     <FormItem>
                                       <FormLabel>Type de Coupon</FormLabel>
                                       <FormControl>
-                                          <Input {...field} placeholder="Type..." />
+                                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                            <SelectTrigger>
+                                              <SelectValue className='text-primary' placeholder="Selectioner le type de coupon." />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                  <SelectItem value={ "ab" } className="hover:bg-primary-foreground hover:text-primary" >
+                                                    <div>
+                                                      ab
+                                                    </div>
+                                                  </SelectItem>
+                                                  <SelectItem value={ "b" } className="hover:bg-primary-foreground hover:text-primary" >
+                                                    <div>
+                                                        b
+                                                    </div>
+                                                  </SelectItem>
+                                            </SelectContent>
+                                          </Select>
                                       </FormControl>
                                       <FormDescription>
                                           Le type de votre coupon.
@@ -139,7 +158,23 @@ export default function CouponPage()  {
                                         <FormItem>
                                           <FormLabel>Type de remise</FormLabel>
                                           <FormControl>
-                                              <Input {...field} placeholder="Type..."/>
+                                          <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                            <SelectTrigger>
+                                              <SelectValue className='text-primary' placeholder="Selectioner le type de remise." />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                  <SelectItem value={ "ab" } className="hover:bg-primary-foreground hover:text-primary" >
+                                                    <div>
+                                                      ab
+                                                    </div>
+                                                  </SelectItem>
+                                                  <SelectItem value={ "b" } className="hover:bg-primary-foreground hover:text-primary" >
+                                                    <div>
+                                                        b
+                                                    </div>
+                                                  </SelectItem>
+                                            </SelectContent>
+                                          </Select>
                                           </FormControl>
                                           <FormDescription>
                                             Le type de remise de coupon.
@@ -154,7 +189,7 @@ export default function CouponPage()  {
                                           <FormItem>
                                             <FormLabel>Pourcentage de remise</FormLabel>
                                             <FormControl>
-                                                <Input {...field} placeholder="Pourcentage..."/>
+                                                <Input {...field} placeholder="Pourcentage..." type="number"/>
                                             </FormControl>
                                             <FormDescription>
                                               Le pourcentage de remise de coupon.
@@ -171,7 +206,7 @@ export default function CouponPage()  {
                                       <FormItem>
                                         <FormLabel>Achat maximum</FormLabel>
                                         <FormControl>
-                                            <Input {...field} placeholder="Max..."/>
+                                            <Input {...field} placeholder="Max..." type="number"/>
                                         </FormControl>
                                         <FormDescription>
                                           L'achat maximum pour le coupon.
@@ -196,7 +231,9 @@ export default function CouponPage()  {
                                                   )}
                                                 >
                                                   {field.value ? (
-                                                    format(field.value, "PPP")
+                                                    format(field.value, "PPP", {
+                                                      locale: fr,
+                                                    })
                                                   ) : (
                                                     <span>Choisissez une date</span>
                                                   )}
@@ -206,6 +243,7 @@ export default function CouponPage()  {
                                             </PopoverTrigger>
                                             <PopoverContent className="w-auto p-0" align="start">
                                               <Calendar
+                                                locale={fr}
                                                 mode="single"
                                                 selected={field.value}
                                                 onSelect={field.onChange}
@@ -239,7 +277,9 @@ export default function CouponPage()  {
                                                   )}
                                                 >
                                                   {field.value ? (
-                                                    format(field.value, "PPP")
+                                                    format(field.value, "PPP", {
+                                                      locale: fr,
+                                                    })
                                                   ) : (
                                                     <span>Choisissez une date</span>
                                                   )}
@@ -249,6 +289,7 @@ export default function CouponPage()  {
                                             </PopoverTrigger>
                                             <PopoverContent className="w-auto p-0" align="start">
                                               <Calendar
+                                                locale={fr}
                                                 mode="single"
                                                 selected={field.value}
                                                 onSelect={field.onChange}

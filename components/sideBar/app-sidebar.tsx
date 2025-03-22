@@ -3,8 +3,6 @@ import {
     SidebarContent,
     SidebarFooter,
     SidebarGroup,
-    SidebarGroupLabel,
-    SidebarHeader,
     SidebarMenu,
   } from "@/components/ui/sidebar"
 import { NavUser } from "./nav-user";
@@ -23,7 +21,6 @@ import { NavUser } from "./nav-user";
       <Sidebar collapsible="icon" className="pt-12 bg-background" variant="inset">
         <SidebarContent>
           <SidebarGroup />
-            <SidebarGroupLabel>General Settings</SidebarGroupLabel>
             <SidebarMenu>
               {children}
             </SidebarMenu>
