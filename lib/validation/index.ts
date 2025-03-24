@@ -40,7 +40,8 @@ export const ChangePasswordValidation = z.object({
 
 export const PushNotificationValidation = z.object({
     title: z.string().min(5, {message: "Le titre doit être supérieur à 5 caractères."}),
-    description: z.string().min(5)
+    description: z.string().min(5),
+    file: z.custom<File[]>()
 })
 
 export const AddNewCouponValidation = z.object({
@@ -58,4 +59,5 @@ export const AddNewCouponValidation = z.object({
 
 export const AddBannerValidation = z.object({
   title: z.string().min(5, {message: "Le titre doit être supérieur à 5 caractères."}),
+  file: z.custom<File[]>()
 })

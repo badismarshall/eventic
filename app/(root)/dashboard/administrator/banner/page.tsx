@@ -1,8 +1,9 @@
 'use client'
 
+import FileUploader from "@/components/fileUploader/FileUploader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/components/ui/form";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -62,23 +63,29 @@ export default function BannerPage()  {
                             />
                             </div>
                             <div className="flex-1 pt-3 justify-center">
-                                <div>Bannière de notification</div>
-                                <Card className="mt-3">
-                                    <CardContent className="p-6 space-y-4">
-                                        <div className="border-2 border-dashed border-gray-200 rounded-lg flex flex-col gap-1 p-6 items-center">
-                                        <FileIcon className="w-12 h-12" />
-                                        <span className="text-sm font-medium text-gray-500">Drag and drop a file or click to browse</span>
-                                        <span className="text-xs text-gray-500">PDF, image, video, or audio</span>
-                                        </div>
-                                        <div className="space-y-2 text-sm">
-                                        <Label htmlFor="file" className="text-sm font-medium">
-                                            Fichier
-                                        </Label>
-                                        <Input id="file" type="file" placeholder="Fichier" accept="image/*" />
-                                        </div>
-                                    </CardContent>
-                                    </Card>
-                                </div>
+                                        <FormField
+                                            control={form.control}
+                                            name="file"
+                                            render={({ field }) => (
+                                                <FormItem>
+                                                <div>
+                                                    <FormLabel>
+                                                        Le Fichier du banner
+                                                    </FormLabel>
+                                                </div>
+                                                <FormControl>
+                                                    <FileUploader 
+                                                        fieldChange={field.onChange}
+                                                    />
+                                                </FormControl>
+                                                <FormDescription>
+                                                    Le fichier image du banner (ex: banner.png)
+                                                </FormDescription>
+                                                <FormMessage/>
+                                                </FormItem>
+                                            )}
+                                            />
+                            </div>
                         </div>
                         <CardFooter className="px-6 mt-5 justify-end">
                             <Button type="submit">Confirmer</Button>
