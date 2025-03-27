@@ -7,7 +7,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { AddBannerValidation } from "@/lib/validation";
+import { AddBannerValidation } from "./validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FileIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -31,7 +31,7 @@ export default function BannerPage()  {
 
   return (
     <div>
-    <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
+    <div className="hidden h-full flex-1 flex-col space-y-8 md:flex">
         <div className="flex items-center justify-between space-y-2">
             <div>
                 <h2 className="text-2xl font-bold tracking-tight">Ajouter de Banner</h2>

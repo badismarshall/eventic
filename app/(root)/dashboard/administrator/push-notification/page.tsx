@@ -1,23 +1,19 @@
 'use client'
 
-import { promises as fs } from "fs"
 import { DataTable } from "@/components/table/data-table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { PushNotificationValidation } from "@/lib/validation";
+import { PushNotificationValidation } from "./validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import path from "path"
 import { ticketsSchema } from "@/components/table/attendee/tickets/tickets-data-table-schema";
 import { columns } from "@/components/table/attendee/tickets/ticketsTableColumns"
 import { DataTableToolbar } from "@/components/table/attendee/tickets/tickets-data-table-toolbar"
 import { useEffect, useState } from "react";
-import { FileIcon } from "lucide-react";
-import { Label } from "@/components/ui/label";
 import FileUploader from "@/components/fileUploader/FileUploader";
 
 type PushNotificationFormValues = z.infer<typeof PushNotificationValidation>
@@ -54,7 +50,7 @@ export default  function  PushNotificationPage (){
 
   return (
     <div>
-        <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
+        <div className="hidden h-full flex-1 flex-col space-y-8  md:flex">
             <div className="flex items-center justify-between space-y-2">
                 <div>
                     <h2 className="text-2xl font-bold tracking-tight">Envoyer des Notifications</h2>

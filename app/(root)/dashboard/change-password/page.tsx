@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { ChangePasswordValidation } from "@/lib/validation"
+import { ChangePasswordValidation } from "./validation"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -30,7 +30,7 @@ export default function AccountPage() {
 
     return(
         <div>
-          <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
+          <div className="hidden h-full flex-1 flex-col space-y-8 md:flex">
             <div className="flex items-center justify-between space-y-2">
               <div>
                 <h2 className="text-2xl font-bold tracking-tight">Gérer Votre Compte! </h2>
@@ -40,7 +40,7 @@ export default function AccountPage() {
               </div>
             </div>
           <div >
-            <Card className="max-w-4xl">
+            <Card className="max-w-5xl">
               <CardContent>
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 pt-3" >

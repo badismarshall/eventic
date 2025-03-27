@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { AddNewCouponValidation } from "@/lib/validation";
+import { AddNewCouponValidation } from "./validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -43,7 +43,7 @@ export default function CouponPage()  {
 
   return(
     <div>
-              <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
+              <div className="hidden h-full flex-1 flex-col space-y-8 md:flex">
                 <div className="flex items-center justify-between space-y-2">
                     <div>
                         <h2 className="text-2xl font-bold tracking-tight">Ajouter des Coupons</h2>
