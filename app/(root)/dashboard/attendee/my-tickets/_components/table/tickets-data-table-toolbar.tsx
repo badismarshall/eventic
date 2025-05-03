@@ -1,7 +1,7 @@
 "use client"
 import { Table } from "@tanstack/react-table"
-import { DataTableFacetedFilter } from "../../data-table-faceted-filter"
-import { DataTableViewOptions } from "../../data-table-view-options"
+import { DataTableFacetedFilter } from "../../../../../../../components/table/attendee/data-table-faceted-filter"
+import { DataTableViewOptions } from "../../../../../../../components/table/attendee/data-table-view-options"
 import { Input } from "@/components/ui/input"
 
 

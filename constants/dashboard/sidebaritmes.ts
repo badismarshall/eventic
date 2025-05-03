@@ -20,8 +20,11 @@ import {
   UserRoundCheck,
   Bell,
   Gift,
-  Images
+  Images,
+  Cog,
+  Tv
 }  from "lucide-react"
+import { title } from "process"
 
 
 
@@ -88,7 +91,7 @@ export const adminSidebarItemsGeneralSetting = [
       },
       {
         title: 'Catégories',
-        url: '/dashboard/administrator/events/categories',
+        url: '/dashboard/administrator/manage-categories',
       },
       {
         title: 'Langues',
@@ -178,6 +181,41 @@ export const adminSideBarItemsPromotionManagement = [
     url: '/dashboard/administrator/banner',
     icon: Images,
     isActive: false
+  }
+]
+
+export const adminSideBarItemsSystemSetup = [
+  {
+    title: 'Configuration du système',
+    url: '/dashboard/administrator/system-setup',
+    icon: Cog,
+    isActive: false,
+    items : [
+      {
+        title: 'Paramètres de l\'application',
+        url: '/dashboard/administrator/system-setup/app-settings',
+      },
+      {
+        title: 'Nettoyer la base de données',
+        url: '/dashboard/administrator/system-setup/clean-db',
+      },
+    ]
+  },
+  {
+    title: 'Pages et médias',
+    url: '/dashboard/administrator/page-media',
+    icon: Tv ,
+    isActive: false,
+    items : [
+      {
+        title: 'Mise en page',
+        url: '/dashboard/administrator/page-media/page-setup',   
+      },
+      {
+        title: 'Réseaux sociaux',
+        url: '/dashboard/administrator/page-media/social-media',   
+      },
+    ]
   }
 ]
 

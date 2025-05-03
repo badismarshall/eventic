@@ -84,7 +84,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
-import AdminDashboardTable from "@/components/table/AdminDashboardTable"
+import AdminDashboardTable from "@/components/table/attendee/AdminDashboardTable"
 import {
     ChartConfig,
     ChartContainer,

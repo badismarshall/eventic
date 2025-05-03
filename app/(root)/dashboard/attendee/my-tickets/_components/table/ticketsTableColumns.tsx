@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { Ticket } from "./tickets-data-table-schema"
 import { Checkbox } from "@/components/ui/checkbox"
-import { DataTableColumnHeader } from "../../administrator/data-table-column-header"
+import { DataTableColumnHeader } from "../../../../../../../components/table/data-table-column-header"
 import { DataTableRowActions } from "./tickets-data-table-row-actions"
 import { format, parseISO } from "date-fns"
 import { fr } from 'date-fns/locale';

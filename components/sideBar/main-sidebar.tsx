@@ -5,7 +5,7 @@ import {
   } from "@/components/ui/sidebar"
 import { AppSidebar } from "./app-sidebar"
 import { NavMain } from "./nav-main"
-import { adminSidebarItemsGeneralSetting, adminSideBarItemsPromotionManagement, attendeeSidebarItems, organizerSidebarItems, pointofsaleSidebarItems, scannerSidebarItems } from "@/constants/dashboard/sidebaritmes"
+import { adminSidebarItemsGeneralSetting, adminSideBarItemsPromotionManagement, adminSideBarItemsSystemSetup, attendeeSidebarItems, organizerSidebarItems, pointofsaleSidebarItems, scannerSidebarItems } from "@/constants/dashboard/sidebaritmes"
 
 const getRoleSpecificSidebar = (role: string) => {
   switch (role) {
@@ -22,6 +22,7 @@ const getRoleSpecificSidebar = (role: string) => {
         <div>
           <NavMain items={adminSidebarItemsGeneralSetting} groupeLabel="Paramètres généraux"/>
           <NavMain items={adminSideBarItemsPromotionManagement} groupeLabel="Gestion des promotions"/>
+          <NavMain items={adminSideBarItemsSystemSetup} groupeLabel="Paramètres du système"/>
         </div>
       )
   }

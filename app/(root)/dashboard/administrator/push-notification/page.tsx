@@ -10,9 +10,9 @@ import { PushNotificationValidation } from "./validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { ticketsSchema } from "@/components/table/attendee/tickets/tickets-data-table-schema";
-import { columns } from "@/components/table/attendee/tickets/ticketsTableColumns"
-import { DataTableToolbar } from "@/components/table/attendee/tickets/tickets-data-table-toolbar"
+import { ticketsSchema } from "@/app/(root)/dashboard/attendee/my-tickets/_components/table/tickets-data-table-schema";
+import { columns } from "@/app/(root)/dashboard/attendee/my-tickets/_components/table/ticketsTableColumns"
+import { DataTableToolbar } from "@/app/(root)/dashboard/attendee/my-tickets/_components/table/tickets-data-table-toolbar"
 import { useEffect, useState } from "react";
 import FileUploader from "@/components/fileUploader/FileUploader";
 

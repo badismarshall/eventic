@@ -4,10 +4,10 @@ import { Metadata } from "next"
 import Image from "next/image"
 import { z } from "zod"
 
-import { columns } from "@/components/table/administrator/events/eventsTableColumns"
+import { columns } from "./_components/table/eventsTableColumns"
 import { DataTable } from "@/components/table/data-table"
-import { taskSchema } from "@/components/table/administrator/events/events-data-table-schema"
-import { DataTableToolbar } from "@/components/table/administrator/events/events-data-table-toolbar"
+import { taskSchema } from "./_components/table/events-data-table-schema"
+import { DataTableToolbar } from "./_components/table/events-data-table-toolbar"
 
 export const metadata: Metadata = {
   title: "Événements",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 // Simulate a database read for tasks.
 async function getTasks() {
   const data = await fs.readFile(
-    path.join(process.cwd(), "/components/table/administrator/events/events-tasks.json")
+    path.join(process.cwd(), "/constants/dashboard/administrator/events/events-tasks.json")
   )
 
   const tasks = JSON.parse(data.toString())

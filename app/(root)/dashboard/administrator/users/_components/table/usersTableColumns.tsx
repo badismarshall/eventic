@@ -6,9 +6,9 @@ import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 
 import { User } from "./users-data-table-schema"
-import { statuses } from "../users/users-data-table-datatest"
-import { DataTableColumnHeader } from "../data-table-column-header"
-import { DataTableRowActions } from "../users/users-data-table-row-actions"
+import { statuses } from "./users-data-table-datatest"
+import { DataTableColumnHeader } from "@/components/table/data-table-column-header"
+import { DataTableRowActions } from "./users-data-table-row-actions"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { format, parseISO } from "date-fns"
 import { fr } from 'date-fns/locale';

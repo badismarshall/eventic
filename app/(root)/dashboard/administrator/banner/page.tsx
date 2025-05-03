@@ -62,7 +62,7 @@ export default function BannerPage()  {
                                 )}
                             />
                             </div>
-                            <div className="flex-1 pt-3 justify-center">
+                            <div className="flex-1 pt-3 justify-ce nter">
                                         <FormField
                                             control={form.control}
                                             name="file"
@@ -84,7 +84,7 @@ export default function BannerPage()  {
                                                 <FormMessage/>
                                                 </FormItem>
                                             )}
-                                            />
+                                        />
                             </div>
                         </div>
                         <CardFooter className="px-6 mt-5 justify-end">

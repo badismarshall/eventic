@@ -3,9 +3,9 @@ import { DataTable } from "@/components/table/data-table"
 import { z } from "zod"
 import path from "path"
 import { promises as fs } from "fs"
-import { columns } from "@/components/table/administrator/users/usersTableColumns"
-import { usersSchema } from "@/components/table/administrator/users/users-data-table-schema"
-import { DataTableToolbar } from "@/components/table/administrator/users/users-data-table-toolbar"
+import { columns } from "./_components/table/usersTableColumns"
+import { usersSchema } from "./_components/table/users-data-table-schema"
+import { DataTableToolbar } from "./_components/table/users-data-table-toolbar"
 
 export const metadata: Metadata = {
     title: "Utilisateurs",
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 // Simulate a database read for users.
 async function getUsers() {
   const data = await fs.readFile(
-    path.join(process.cwd(), "/components/table/administrator/users/users-data.json")
+    path.join(process.cwd(), "/constants/dashboard/administrator/users/users-data.json")
   )
 
   const users = JSON.parse(data.toString())
