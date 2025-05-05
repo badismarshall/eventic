@@ -5,7 +5,7 @@ import Link from "next/link"
 import eventiclog from '@/public/img/logos/eventic-purpul.png'
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
-import { SignUpUserForm } from "@/components/forms/user-signup-form"
+import { SignUpUserForm } from "./_components/user-signup-form"
 
 export const metadata: Metadata = {
   title: "Eventic - Authentification",

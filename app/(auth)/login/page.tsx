@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 // import eventiclog from '@/public/img/illustrations/Illustration.svg'
 import eventiclog from '@/public/img/logos/eventic-purpul.png'
-import { LoginUserAuthForm } from "@/components/forms/user-auth-form"
+import { LoginUserAuthForm } from "./_components/user-auth-form"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
 

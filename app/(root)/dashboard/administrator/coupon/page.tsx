@@ -52,7 +52,7 @@ export default function CouponPage()  {
                         </p>
                     </div>
                 </div>
-                <Card className=" pt-3">
+                <Card className=" pt-5">
                   <CardContent>
                       <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)}>

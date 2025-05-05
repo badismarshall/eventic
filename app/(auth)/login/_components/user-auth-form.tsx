@@ -7,22 +7,20 @@ import { Icons } from "@/components/ui/icons"
 import { Button } from '@/components/ui/button'
 import { Input } from "@/components/ui/input"
 // import { login } from "@/server/actions/userAuth"
-import { SignupValidation } from "@/lib/validation"
+import { SigninValidation } from "../validation"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "../ui/form"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { useToast } from "@/components/ui/use-toast"
 import Link from "next/link"
-import { SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
-import { Select } from "@radix-ui/react-select"
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
+export function LoginUserAuthForm({ className, ...props }: UserAuthFormProps) {
   const { toast } = useToast()
-  const form = useForm<z.infer<typeof SignupValidation>>({
-    resolver: zodResolver(SignupValidation),
+  const form = useForm<z.infer<typeof SigninValidation>>({
+    resolver: zodResolver(SigninValidation),
     defaultValues: {
       email: '',
       password: '',
@@ -30,7 +28,7 @@ export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
   })
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
-  async function onSubmit(values: z.infer<typeof SignupValidation>) {
+  async function onSubmit(values: z.infer<typeof SigninValidation>) {
 
     setIsLoading(true)
 
@@ -60,7 +58,7 @@ export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
           name="email"
           render={({ field }) => (
             <FormItem className="grid gap-1">
-              <FormLabel htmlFor="email">
+              <FormLabel className="" htmlFor="email">
                 Email
               </FormLabel>
               <FormControl>
@@ -83,7 +81,7 @@ export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
           name="password"
           render={({ field }) => (
             <FormItem className="grid gap-1">
-              <FormLabel>
+              <FormLabel className="">
                 Mot de passe
               </FormLabel>
               <FormControl>
@@ -97,53 +95,14 @@ export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
                     {...field}
                   />
               </FormControl>
-              <FormDescription className="text-gray-400 text-xs">
-                Min 8 caractères avec une combinaison de lettres et de chiffres
-              </FormDescription> 
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="confirmPassword"
-          render={({ field }) => (
-            <FormItem className="grid gap-1">
-              <FormLabel>
-                Confiramation de Mot de pass
-              </FormLabel>
-              <FormControl>
-                <Input
-                    id="confirmPassword"
-                    placeholder="Confirmer votre mot de pass"
-                    type="password"
-                    autoCapitalize="none"
-                    autoCorrect="off"
-                    disabled={isLoading}
-                    {...field}
-                  />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="userRole"
-          render={({ field }) => (
-            <FormItem className="grid gap-1">
-              <FormLabel>
-                Role
-              </FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <FormControl>
-              <SelectTrigger>
-                    <SelectValue placeholder="Vous êtes Qui?" className="text-muted-foreground"/>
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                  <SelectItem value="Participant">Participant</SelectItem>
-                  <SelectItem value="Organisateur">Organisateur</SelectItem>
-                </SelectContent>
-                </Select>
+              <FormDescription className="text-primary text-end">
+                <Link
+                  href="/forgetpassword"
+                  className="text-primary"
+                >
+                  Mot de passe oublié?
+                </Link>
+              </FormDescription>
             </FormItem>
           )}
         />
@@ -151,15 +110,15 @@ export function SignUpUserForm({ className, ...props }: UserAuthFormProps) {
           {isLoading && (
             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
           )}
-            S'inscrire
+          Connexion
         </Button>
         <p className="text-sm text-muted-foreground text-center">
-            Vous avez déjà un compte? {" "}
+          Vous n'avez pas de compte? {" "}
           <Link
-                href="/login"
+                href="/sign-up"
                 className="text-primary"
               >
-                 Se connecter
+                 Register
           </Link>
         </p>
       </form>

@@ -44,7 +44,7 @@ export default function BannerPage()  {
             <CardContent>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
-                        <div className="flex flex-row p-3 gap-5">
+                        <div className="grid grid-cols-1 xl:grid-cols-2 p-3 gap-5">
                             <div className="space-y-6 pt-3 flex-1">
                             <FormField
                                 control={form.control}

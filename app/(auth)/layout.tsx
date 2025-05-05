@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/toaster"
+import BlurText from "@/components/ui/blurtextanimated";
 
 export default function RootLayout({
     children,
@@ -26,16 +27,18 @@ export default function RootLayout({
             Eventic
           </div>
           <div className="relative z-20 mt-auto">
-            <blockquote className="space-y-2">
-              <p className="text-lg">
-                Meilleure application de réservation de billets
-              </p>
-              <footer className="text-xs">En Algérie</footer>
-            </blockquote>
+              <BlurText
+                text="Meilleure application de réservation de billets!"
+                delay={150}
+                animateBy="words"
+                direction="top"
+                className="text-2xl mb-8"
+              />
           </div>
         </div>
         <main>{children}</main>
         </div>
+
         <Toaster />
       </>
     );
